@@ -9,55 +9,31 @@ public class Day6 {
 
     public static void main(String[] args) {
 
-        String[] data = Util.getInput("test.txt");
+        String[] data = Util.getInput("day6.txt");
 
         List<Short> lanternfishes = Arrays.stream(data[0].split(",")).map(Short::parseShort).collect(Collectors.toList());
 
-        int day = 256;
-        List<Short> toAdd = new ArrayList<>();
-//
-//        for (int i = 0; i < day; i ++) {
-//            toAdd.clear();
-//            for (int j = 0; j < lanternfishes.size(); j ++) {
-//                int fish = lanternfishes.get(j);
-//                if (fish == 0) {
-//                    lanternfishes.set(j, 6);
-//                    toAdd.add(8);
-//                } else {
-//                    lanternfishes.set(j, fish - 1);
-//                }
-//            }
-//            lanternfishes.addAll(toAdd);
-//        }
-//
-//        System.out.println("Après " + day + " jours: " + lanternfishes.size());
+        int day = 256; // A mettre à 80 pour le premier problème
 
-        int numberOfFish = 0;
-
-        // TODO Optimiser encore plus l'espace mémoire utiliser pour pouvoir run le programme
-        List<Short> descendance = new ArrayList<>();
-        int treated = 0;
-        for (Short fish : lanternfishes) {
-            descendance.add(fish);
-            for (int i = 0; i < day; i ++) {
-                for (int j = 0; j < descendance.size(); j ++) {
-                    int f = descendance.get(j);
-                    if (f == 0) {
-                        descendance.set(j, (short) 6);
-                        toAdd.add((short) 8);
-                    } else {
-                        descendance.set(j, (short) (f - 1));
-                    }
-                }
-                descendance.addAll(toAdd);
-                toAdd.clear();
-            }
-            System.out.println(treated ++);
-            numberOfFish += descendance.size();
-            descendance.clear();
+        long[] dayLeft = new long[9];
+        for (int dl :  lanternfishes) {
+            dayLeft[dl] += 1;
         }
 
-        System.out.println("Après " + day + " jours: " + numberOfFish);
+        for (int i = 0; i < day; i ++) {
+
+            long[] updated = new long[9];
+            updated[8] = dayLeft[0];
+            updated[6] = dayLeft[0];
+            for (int j = 1; j < dayLeft.length; j ++) {
+                updated[j-1] += dayLeft[j];
+            }
+
+            dayLeft = updated;
+
+        }
+
+        System.out.println("Après " + day + " jours: " + Arrays.stream(dayLeft).sum());
 
     }
 

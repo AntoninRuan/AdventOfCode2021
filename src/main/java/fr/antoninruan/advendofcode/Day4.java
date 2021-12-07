@@ -29,6 +29,13 @@ public class Day4 {
         }
         boards.add(new Board(currentBoard));
 
+        System.out.println("First winning score: " + problem1(boards, order));
+
+        System.out.println("Last winning score: " + problem2(boards, order));
+
+    }
+
+    private static int problem1(List<Board> boards, List<Integer> order) {
         int winner = 0;
         int last = 0;
 
@@ -42,11 +49,12 @@ public class Day4 {
                 }
             }
         }
+        return calculateScore(boards.get(winner), last);
+    }
 
-        System.out.println("First winning score: " + calculateScore(boards.get(winner), last));
-
+    private static int problem2(List<Board> boards, List<Integer> order) {
+        int last = 0;
         ListIterator<Integer> iterator = order.listIterator();
-
         while(iterator.hasNext() && boards.size() > 0) {
             last = iterator.next();
             for (Board b : boards) {
@@ -58,9 +66,7 @@ public class Day4 {
             } else
                 boards.removeIf(Board::isWinner);
         }
-
-        System.out.println("Last winning score: " + calculateScore(boards.get(0), last));
-
+        return calculateScore(boards.get(0), last);
     }
 
     private static int calculateScore(Board b, int last) {

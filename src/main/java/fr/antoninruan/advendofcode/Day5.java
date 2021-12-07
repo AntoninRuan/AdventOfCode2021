@@ -70,7 +70,8 @@ public class Day5 {
             this.start = start;
             this.end = end;
             this.line = new ArrayList<>();
-            // TODO calculate all points on the line
+            /* La création des lignes est faite en supposant que les lignes sont
+               soit horizontales, soit verticales, soit diagonales */
             if (start.getX() == end.getX()) {
                 int min = Math.min(start.getY(), end.getY());
                 int max = Math.max(start.getY(), end.getY());
@@ -83,8 +84,7 @@ public class Day5 {
                 for (int i = 0; i <= max - min; i ++) {
                     this.line.add(new Point2D(min + i, end.getY()));
                 }
-            } else {
-                // On suppose que les lignes sont soit verticales, soit horizontales, soit diagonales
+            } else { // Enlever cette dernière partie pour la première partie du problème
                 int xSign = (int) Math.signum(end.getX() - start.getX());
                 int ySign = (int) Math.signum(end.getY() - start.getY());
                 for (int i = 0; i <= Math.abs(end.getY() - start.getY()); i ++) {
