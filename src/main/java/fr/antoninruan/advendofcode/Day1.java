@@ -1,7 +1,8 @@
 package fr.antoninruan.advendofcode;
 
+import fr.antoninruan.advendofcode.util.Util;
+
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Day1 {
 

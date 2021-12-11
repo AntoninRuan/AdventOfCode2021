@@ -1,6 +1,7 @@
 package fr.antoninruan.advendofcode;
 
-import java.util.ArrayList;
+import fr.antoninruan.advendofcode.util.Util;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

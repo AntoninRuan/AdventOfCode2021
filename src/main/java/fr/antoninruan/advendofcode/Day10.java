@@ -1,5 +1,7 @@
 package fr.antoninruan.advendofcode;
 
+import fr.antoninruan.advendofcode.util.Util;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

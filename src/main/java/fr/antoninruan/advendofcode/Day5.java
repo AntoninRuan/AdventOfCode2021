@@ -1,5 +1,8 @@
 package fr.antoninruan.advendofcode;
 
+import fr.antoninruan.advendofcode.util.Point2D;
+import fr.antoninruan.advendofcode.util.Util;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,36 +32,6 @@ public class Day5 {
         long dangerPoint = Arrays.stream(grid).mapToLong(l -> Arrays.stream(l).filter(i -> i >= 2).count()).sum();
         System.out.println("Number of danger points: " + dangerPoint);
 
-    }
-
-    private static class Point2D {
-        private int x, y;
-
-        public Point2D(String s) {
-            this.x = Integer.parseInt(s.split(",")[0]);
-            this.y = Integer.parseInt(s.split(",")[1]);
-        }
-
-        public Point2D(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        @Override
-        public String toString() {
-            return "Point2D{" +
-                    "x=" + x +
-                    ", y=" + y +
-                    '}';
-        }
     }
 
     private static class Line {

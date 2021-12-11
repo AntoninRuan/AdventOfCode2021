@@ -2,6 +2,7 @@ package fr.antoninruan.advendofcode;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import fr.antoninruan.advendofcode.util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

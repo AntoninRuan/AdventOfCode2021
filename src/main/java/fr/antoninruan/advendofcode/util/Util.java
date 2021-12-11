@@ -1,4 +1,4 @@
-package fr.antoninruan.advendofcode;
+package fr.antoninruan.advendofcode.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

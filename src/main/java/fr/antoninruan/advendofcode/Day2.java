@@ -1,5 +1,7 @@
 package fr.antoninruan.advendofcode;
 
+import fr.antoninruan.advendofcode.util.Util;
+
 public class Day2 {
 
     public static void main(String... args) {
