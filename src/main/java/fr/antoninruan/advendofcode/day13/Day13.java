@@ -1,4 +1,4 @@
-package fr.antoninruan.advendofcode;
+package fr.antoninruan.advendofcode.day13;
 
 import fr.antoninruan.advendofcode.util.Point2D;
 import fr.antoninruan.advendofcode.util.Util;

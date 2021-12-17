@@ -1,4 +1,4 @@
-package fr.antoninruan.advendofcode;
+package fr.antoninruan.advendofcode.day8;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
