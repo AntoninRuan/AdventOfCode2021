@@ -13,9 +13,9 @@ public class Packet {
     private final int type;
     private final boolean hasSubpacket;
     private List<Packet> subpackets;
-    private final BigInteger value;
+    private final long value;
 
-    private Packet(int version, int type, BigInteger value) {
+    private Packet(int version, int type, long value) {
         this.version = version;
         this.type = type;
         this.value = value;
@@ -27,7 +27,7 @@ public class Packet {
         this.type = type;
         this.hasSubpacket = true;
         this.subpackets = subpackets;
-        this.value = BigInteger.valueOf(-1L);
+        this.value = -1L;
     }
 
     public int getVersion() {
@@ -46,7 +46,7 @@ public class Packet {
         return subpackets;
     }
 
-    public BigInteger getValue() {
+    public long getValue() {
         return value;
     }
 
@@ -63,15 +63,15 @@ public class Packet {
         int type = Integer.parseInt(bin.substring(start.get() + 3, start.get() + 6), 2);
 
         if (type == 4) {
-            BigInteger value = BigInteger.ZERO;
+            long value = 0;
 
             int offset = 6;
             boolean hasNext = true;
             while (hasNext) {
                 if (bits[start.get() + offset] == '0')
                     hasNext = false;
-                value = value.shiftLeft(4);
-                value = value.add(new BigInteger(bin.substring(start.get() + offset + 1, start.get() + offset + 5), 2));
+                value = value << 4;
+                value += Long.parseLong(bin.substring(start.get() + offset + 1, start.get() + offset + 5), 2);
                 offset += 5;
             }
 
@@ -102,44 +102,44 @@ public class Packet {
 
     }
 
-    protected BigInteger evaluate() {
+    protected long evaluate() {
         if (this.hasSubpacket) {
             switch (this.getType()) {
                 case 0 -> {
-                    return this.getSubpackets().stream().map(Packet::evaluate).reduce((bigInteger, bigInteger2) -> bigInteger.add(bigInteger2)).orElseThrow();
+                    return this.getSubpackets().stream().mapToLong(Packet::evaluate).sum();
                 }
                 case 1 -> {
-                    BigInteger result = BigInteger.ONE;
+                    long result = 1;
                     for (Packet c : this.getSubpackets())
-                        result = result.multiply(c.evaluate());
+                        result *= c.evaluate();
                     return result;
                 }
                 case 2 -> {
-                    return this.getSubpackets().stream().map(Packet::evaluate).min(BigInteger::compareTo).orElseThrow();
+                    return this.getSubpackets().stream().mapToLong(Packet::evaluate).min().orElseThrow();
                 }
                 case 3 ->  {
-                    return this.getSubpackets().stream().map(Packet::evaluate).max(BigInteger::compareTo).orElseThrow();
+                    return this.getSubpackets().stream().mapToLong(Packet::evaluate).max().orElseThrow();
                 }
                 case 5 ->  {
                     Packet c0 = this.getSubpackets().get(0), c1 = this.getSubpackets().get(1);
-                    if (c0.evaluate().compareTo(c1.evaluate()) == 1)
-                        return BigInteger.ONE;
+                    if (c0.evaluate() > c1.evaluate())
+                        return 1L;
                     else
-                        return BigInteger.ZERO;
+                        return 0L;
                 }
                 case 6 -> {
                     Packet c0 = this.getSubpackets().get(0), c1 = this.getSubpackets().get(1);
-                    if (c0.evaluate().compareTo(c1.evaluate()) == -1)
-                        return BigInteger.ONE;
+                    if (c0.evaluate() < c1.evaluate())
+                        return 0;
                     else
-                        return BigInteger.ZERO;
+                        return 1;
                 }
                 case 7 -> {
                     Packet c0 = this.getSubpackets().get(0), c1 = this.getSubpackets().get(1);
-                    if (c0.evaluate().compareTo(c1.evaluate()) == 0)
-                        return BigInteger.ONE;
+                    if (c0.evaluate() == c1.evaluate())
+                        return 1L;
                     else
-                        return BigInteger.ZERO;
+                        return 0L;
                 }
             }
 

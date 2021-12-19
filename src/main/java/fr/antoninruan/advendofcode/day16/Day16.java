@@ -22,7 +22,7 @@ public class Day16 {
     }
 
     private static int problem1(Packet p) {
-        Stack<Packet> children = new Stack();
+        Stack<Packet> children = new Stack<>();
         children.add(p);
         int result = 0;
         while(!children.isEmpty()) {
@@ -34,7 +34,7 @@ public class Day16 {
         return result;
     }
 
-    private static BigInteger problem2(Packet p) {
+    private static long problem2(Packet p) {
         return p.evaluate();
     }
 
