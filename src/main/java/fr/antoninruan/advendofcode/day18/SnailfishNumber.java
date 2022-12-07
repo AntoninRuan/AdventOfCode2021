@@ -3,8 +3,6 @@ package fr.antoninruan.advendofcode.day18;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.m;
-
 public class SnailfishNumber {
     
     private static final char opening = '[';

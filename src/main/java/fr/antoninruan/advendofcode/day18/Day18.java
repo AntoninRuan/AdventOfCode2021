@@ -1,7 +1,5 @@
 package fr.antoninruan.advendofcode.day18;
 
-import java.util.Arrays;
-
 import fr.antoninruan.advendofcode.util.Util;
 
 public class Day18 {
