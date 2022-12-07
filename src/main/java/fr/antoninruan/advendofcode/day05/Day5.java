@@ -1,4 +1,4 @@
-package fr.antoninruan.advendofcode.day5;
+package fr.antoninruan.advendofcode.day05;
 
 import fr.antoninruan.advendofcode.util.Point2D;
 import fr.antoninruan.advendofcode.util.Util;
@@ -68,14 +68,6 @@ public class Day5 {
 
         public List<Point2D> getLine() {
             return line;
-        }
-
-        public Point2D getStart() {
-            return start;
-        }
-
-        public Point2D getEnd() {
-            return end;
         }
     }
 

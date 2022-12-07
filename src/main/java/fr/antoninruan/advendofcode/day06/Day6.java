@@ -1,4 +1,4 @@
-package fr.antoninruan.advendofcode.day6;
+package fr.antoninruan.advendofcode.day06;
 
 import fr.antoninruan.advendofcode.util.Util;
 

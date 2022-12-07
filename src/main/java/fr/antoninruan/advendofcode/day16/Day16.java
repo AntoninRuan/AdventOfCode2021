@@ -2,7 +2,6 @@ package fr.antoninruan.advendofcode.day16;
 
 import fr.antoninruan.advendofcode.util.Util;
 
-import java.math.BigInteger;
 import java.util.Stack;
 
 public class Day16 {
